@@ -9,9 +9,9 @@ final class Pocket
     private string $consumer_key;
     private string $access_token;
 
-    public function __construct()
+    public function __construct(string $configPath)
     {
-        $config = Utils::getConfig(dirname(__FILE__) . "/configs/config_pocket.json");
+        $config = Utils::getConfig($configPath);
         $this->consumer_key = $config["consumer_key"];
         $this->access_token = $config["access_token"];
     }

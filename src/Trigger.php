@@ -6,7 +6,7 @@ namespace yananob\mytools;
 
 final class Trigger
 {
-    private $debugDate;
+    private \DateTime $debugDate;
 
     public function __construct()
     {

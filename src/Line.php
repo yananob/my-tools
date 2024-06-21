@@ -8,9 +8,9 @@ final class Line
 {
     private array $tokens;
 
-    public function __construct(string $config_path)
+    public function __construct(string $configPath)
     {
-        $config = Utils::getConfig($config_path);
+        $config = Utils::getConfig($configPath);
         $this->tokens = $config["tokens"];
     }
 
