@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yananob\MyTools;
+namespace Yananob\MyTools\Line;
 
-final class LINE
+final class Line
 {
     private array $tokens;
 
