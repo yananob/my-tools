@@ -1,0 +1,11 @@
+{
+    "name": "yananob/mytools",
+    "description": "mytools",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Yananob\\Mytools\\": "src/"
+        }
+    },
+    "require": {}
+}
