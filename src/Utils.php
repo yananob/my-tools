@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace yananob\myTools;
+namespace yananob\mytools;
 
 use Psr\Http\Message\ServerRequestInterface;
 use CloudEvents\V1\CloudEventInterface;
