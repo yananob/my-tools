@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-use PHPUnit\Framework\TestCase;
-use yananob\mytools\Utils;
+require_once __DIR__ . '/../vendor/autoload.php';
 
-// require_once __DIR__ . 
+use yananob\mytools\Utils as Utils;
 
-final class UtilsTest extends TestCase
+final class UtilsTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetConfig(): void
     {
