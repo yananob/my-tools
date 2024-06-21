@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use yananob\mytools\Utils as Utils;
+use yananob\mytools\Utils;
 
 final class UtilsTest extends \PHPUnit\Framework\TestCase
 {

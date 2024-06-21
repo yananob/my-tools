@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use yananob\mytools\CacheStore as CacheStore;
+use yananob\mytools\CacheStore;
 
 final class CacheStoreTest extends PHPUnit\Framework\TestCase
 {

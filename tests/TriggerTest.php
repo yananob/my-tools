@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-use yananob\mytools\Trigger as Trigger;
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use yananob\mytools\Trigger;
 
 final class TriggerTest extends PHPUnit\Framework\TestCase
 {
