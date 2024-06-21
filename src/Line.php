@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyTools;
+namespace Yananob\MyTools;
 
 final class LINE
 {
