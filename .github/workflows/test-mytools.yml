@@ -59,12 +59,11 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Create config_*.json
-      run: |
-        pwd
-        cp -v configs/common.json.sample configs/common.json
-        cp -v configs/config_line.json.sample configs/config_line.json
-        cp -v configs/config_pocket.json.sample configs/config_pocket.json
+    # - name: Create config_*.json
+    #   run: |
+    #     pwd
+    #     cp -v configs_sample/config_line.json.sample configs/config_line.json
+    #     cp -v configs_sample/config_pocket.json.sample configs/config_pocket.json
 
     - name: Test with phpunit
       run: bash tests/run_tests.sh
