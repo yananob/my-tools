@@ -1,7 +1,7 @@
 name: Run test for mytools
 
 env:
-  target: src
+  target: .
 
 on:
   pull_request:

@@ -1,6 +1,6 @@
 {
     "name": "yananob/mytools",
-    "description": "mytools",
+    "description": "My tools",
     "type": "library",
     "require": {
         "php": ">= 8.2",
