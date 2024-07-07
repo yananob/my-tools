@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use yananob\mytools\Trigger;
 
-final class TriggerTest extends PHPUnit\Framework\TestCase
+final class TriggerTest extends TestCase
 {
     public static function isLaunchDataProvider(): array
     {
@@ -20,9 +20,8 @@ final class TriggerTest extends PHPUnit\Framework\TestCase
             "Unmatch: hour" => ["2023-02-01 10:00:00", null, null, 11, false],
         ];
     }
-    /**
-     * @dataProvider isLaunchDataProvider
-     */
+
+    #[DataProvider("isLaunchDataProvider")]
     public function testIsLaunch($now, $timing_weekdays, $timing_day, $timing_hour, $expected): void
     {
         $timing = [];
@@ -50,9 +49,8 @@ final class TriggerTest extends PHPUnit\Framework\TestCase
             "False: 23:31" => ["2023-02-01 23:31:00", false],
         ];
     }
-    /**
-     * @dataProvider isWatchTimingDataProvider
-     */
+
+    #[DataProvider("isWatchTimingDataProvider")]
     public function testIsWatchTiming($now, $expected): void
     {
         $trigger = new Trigger();
