@@ -23,25 +23,6 @@ final class Utils
         return $result;
     }
 
-    public static function getBasePath(bool $isLocal, string $appName): string
-    {
-        if ($isLocal) {
-            return "/";
-        }
-
-        return "/{$appName}/";
-    }
-
-    public static function getBaseUrl(bool $isLocal, string $appName): string
-    {
-        if ($isLocal) {
-            return "http://localhost:8080" . self::getBasePath($isLocal, $appName);
-        } else {
-            $config = self::getConfig(__DIR__ . "/configs/common.json");
-            return $config["base_url"] . self::getBasePath($isLocal, $appName);
-        }
-    }
-
     public static function invokePrivateMethod(Object $object, string $methodName, ...$params)
     {
         $reflection = new \ReflectionClass($object);
