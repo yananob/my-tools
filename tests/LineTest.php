@@ -12,8 +12,8 @@ final class LineTest extends TestCase
         $line = new Line(__DIR__ . "/configs/line.json");
 
         $line->sendMessage(
-            bot: "nobu",
-            target: "nobu",
+            bot: "test",
+            target: "test",
             message: "[LineTest] Sent by Messaging API!",
         );
         $this->assertTrue(true);
