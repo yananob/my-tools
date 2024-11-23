@@ -16,7 +16,12 @@ final class Line
         $this->targetIds = $config["target_ids"];
     }
 
-    public function sendMessage(string $bot, string $target, string $message): void
+    public function sendMessage(
+        string $bot,
+        string $target,
+        string $message,
+        string $replyToken = null,
+    ): void
     {
         if (!array_key_exists($bot, $this->tokens)) {
             throw new \Exception("Unknown bot: {$bot}");
@@ -38,6 +43,9 @@ final class Line
                 ],
             ],
         ];
+        if (!empty($replyToken)) {
+            $body["replyToken"] = $replyToken;
+        }
         $ch = curl_init();
         try {
             curl_setopt_array($ch, [
@@ -50,7 +58,10 @@ final class Line
             $response = curl_exec($ch);
             $httpcode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
             if ($httpcode != "200") {
-                throw new \Exception("Failed to send message [bot: {$bot}, to: {$target}, message: {$message}]. Http response code: [{$httpcode}]");
+                throw new \Exception(
+                    "Failed to send message [bot: {$bot}, to: {$target}, message: {$message}]. " .
+                        "Http response code: [{$httpcode}]"
+                );
             }
         } finally {
             curl_close($ch);
