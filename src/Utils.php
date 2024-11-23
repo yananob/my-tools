@@ -10,13 +10,13 @@ final class Utils
     {
     }
 
-    public static function getConfig(string $path): array
+    public static function getConfig(string $path, bool $asArray = true): array
     {
         $contents = file_get_contents($path);
         if ($contents == false) {
             throw new \Exception("Could not read config file: {$path}");
         }
-        $result = json_decode($contents, true);
+        $result = json_decode($contents, $asArray);
         if (is_null($result)) {
             throw new \Exception("Failed to parse config file: {$path}");
         }
