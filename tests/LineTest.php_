@@ -7,11 +7,15 @@ use yananob\mytools\Line;
 
 final class LineTest extends TestCase
 {
-    public function testsendMessage(): void
+    public function testSendMessage(): void
     {
         $line = new Line(__DIR__ . "/configs/line.json");
 
-        $line->sendMessage("nobu", "nobu", "[LineTest] Sent by Messaging API!");
+        $line->sendMessage(
+            bot: "nobu",
+            target: "nobu",
+            message: "[LineTest] Sent by Messaging API!",
+        );
         $this->assertTrue(true);
     }
 }

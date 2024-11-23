@@ -7,27 +7,35 @@ namespace yananob\mytools;
 final class Line
 {
     private array $tokens;
-    private array $targetIds;
+    private array $presetTargetIds;
 
     public function __construct(string $configPath)
     {
         $config = Utils::getConfig($configPath);
         $this->tokens = $config["tokens"];
-        $this->targetIds = $config["target_ids"];
+        $this->presetTargetIds = $config["target_ids"];
     }
 
+    /** 
+     * @param $target ターゲット line.jsonで指定した宛先を指定
+     * @param $targetId ターゲットID eventから取得したIDなど、toを直接指定したい場合に指定
+     */
     public function sendMessage(
         string $bot,
-        string $target,
-        string $message,
-        string $replyToken = null,
+        ?string $target = null,
+        ?string $targetId = null,
+        string $message = "",
+        ?string $replyToken = null,
     ): void
     {
         if (!array_key_exists($bot, $this->tokens)) {
             throw new \Exception("Unknown bot: {$bot}");
         }
-        if (!array_key_exists($target, $this->targetIds)) {
+        if (!empty($target) && !array_key_exists($target, $this->presetTargetIds)) {
             throw new \Exception("Unknown target: {$target}");
+        }
+        if (empty($target) && empty($targetId)) {
+            throw new \Exception('Please specify $target or $targetId');
         }
 
         $headers = [
@@ -35,7 +43,6 @@ final class Line
             "Authorization: Bearer {$this->tokens[$bot]}",
         ];
         $body = [
-            "to" => $this->targetIds[$target],
             "messages" => [
                 [
                     "type" => "text",
@@ -43,6 +50,11 @@ final class Line
                 ],
             ],
         ];
+        if (!empty($target)) {
+            $body["to"] = $this->presetTargetIds[$target];
+        } else {
+            $body["to"] = $targetId;
+        }
         if (!empty($replyToken)) {
             $body["replyToken"] = $replyToken;
         }
