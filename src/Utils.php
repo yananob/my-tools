@@ -10,7 +10,7 @@ final class Utils
     {
     }
 
-    public static function getConfig(string $path, bool $asArray = true): array
+    public static function getConfig(string $path, bool $asArray = true): array|object
     {
         $contents = file_get_contents($path);
         if ($contents == false) {
