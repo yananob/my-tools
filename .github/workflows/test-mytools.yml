@@ -59,11 +59,17 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    # - name: Create config_*.json
-    #   run: |
-    #     pwd
-    #     cp -v configs_sample/config_line.json.sample configs/config_line.json
-    #     cp -v configs_sample/config_pocket.json.sample configs/config_pocket.json
+    - name: Create tests/configs/gpt.json
+      env:
+        DECODED_GPT_BASE64: ${{ secrets.GPT_BASE64 }}
+      run: |
+        echo $DECODED_GPT_BASE64 | base64 --decode > tests/configs/gpt.json
+
+    - name: Create tests/configs/line.json
+      env:
+        DECODED_LINE_BASE64: ${{ secrets.LINE_BASE64 }}
+      run: |
+        echo $DECODED_LINE_BASE64 | base64 --decode > tests/configs/line.json
 
     - name: Test with phpunit
       run: bash tests/run_tests.sh
