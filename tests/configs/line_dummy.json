@@ -1,0 +1,14 @@
+{
+    "tokens": {
+        "__MEMO__": "ここはLINE公式アカウントの、チャネルアクセストークンを指定",
+        "hoge1": "hoge1TOKEN",
+        "hoge2": "hoge2TOKEN",
+        "__EOF__": ""
+    },
+    "target_ids": {
+        "__MEMO__": "ここにグループIDやユーザーIDを指定",
+        "hoge1": "hoge1ID",
+        "hoge2": "hoge2ID",
+        "__EOF__": ""
+    }
+}
