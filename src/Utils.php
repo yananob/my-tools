@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace yananob\mytools;
+namespace yananob\MyTools;
 
 final class Utils
 {

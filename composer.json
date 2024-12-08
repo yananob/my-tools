@@ -1,5 +1,5 @@
 {
-    "name": "yananob/mytools",
+    "name": "yananob/my-tools",
     "description": "My tools",
     "type": "library",
     "require": {
@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "yananob\\mytools\\": "src/"
+            "yananob\\MyTools\\": "src/"
         }
     },
     "require-dev": {

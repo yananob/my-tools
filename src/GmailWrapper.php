@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace yananob\mytools;
+namespace yananob\MyTools;
 
 // use Google\Client;
 // use MyApp\common\Logger;

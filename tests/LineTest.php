@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use yananob\mytools\Line;
+use yananob\MyTools\Line;
 
 final class LineTest extends TestCase
 {

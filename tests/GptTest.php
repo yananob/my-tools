@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use yananob\mytools\Gpt;
+use yananob\MyTools\Gpt;
 
 final class GptTest extends TestCase
 {

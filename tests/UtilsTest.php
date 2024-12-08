@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use yananob\mytools\Utils;
+use yananob\MyTools\Utils;
 
 final class UtilsTest extends TestCase
 {

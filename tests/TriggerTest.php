@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use yananob\mytools\Trigger;
+use yananob\MyTools\Trigger;
 
 final class TriggerTest extends TestCase
 {
