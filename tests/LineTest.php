@@ -22,7 +22,7 @@ final class LineTest extends TestCase
     {
         $line = new Line(__DIR__ . "/configs/line_dummy.json");
         $this->assertEquals(
-            ["__MEMO__", "hoge", "__EOF__"],
+            ["hoge1", "hoge2"],
             $line->getTargets()
         );
     }

@@ -82,6 +82,13 @@ final class Line
 
     public function getTargets(): array
     {
-        return array_keys($this->presetTargetIds);
+        $result = [];
+        foreach (array_keys($this->presetTargetIds) as $target) {
+            if (str_starts_with($target, "__")) {
+                continue;
+            }
+            $result[] = $target;
+        }
+        return $result;
     }
 }
