@@ -10,12 +10,20 @@ final class LineTest extends TestCase
     public function testSendMessage(): void
     {
         $line = new Line(__DIR__ . "/configs/line.json");
-
         $line->sendMessage(
             bot: "test",
             target: "test",
             message: "[LineTest] Sent by Messaging API!",
         );
         $this->assertTrue(true);
+    }
+
+    public function testGetTargets(): void
+    {
+        $line = new Line(__DIR__ . "/configs/line_dummy.json");
+        $this->assertEquals(
+            ["__MEMO__", "hoge", "__EOF__"],
+            $line->getTargets()
+        );
     }
 }

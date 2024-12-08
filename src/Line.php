@@ -79,4 +79,9 @@ final class Line
             curl_close($ch);
         }
     }
+
+    public function getTargets(): array
+    {
+        return array_keys($this->presetTargetIds);
+    }
 }
