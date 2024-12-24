@@ -25,9 +25,7 @@ final class Line
         ?string $target = null,
         ?string $targetId = null,
         string $message = "",
-        ?string $replyToken = null,
-    ): void
-    {
+    ): void {
         if (!array_key_exists($bot, $this->tokens)) {
             throw new \Exception("Unknown bot: {$bot}");
         }
@@ -38,11 +36,8 @@ final class Line
             throw new \Exception('Please specify $target or $targetId');
         }
 
-        $headers = [
-            "Content-Type: application/json",
-            "Authorization: Bearer {$this->tokens[$bot]}",
-        ];
         $body = [
+            "to" => empty($target) ? $targetId : $this->presetTargetIds[$target],
             "messages" => [
                 [
                     "type" => "text",
@@ -50,19 +45,40 @@ final class Line
                 ],
             ],
         ];
-        if (!empty($target)) {
-            $body["to"] = $this->presetTargetIds[$target];
-        } else {
-            $body["to"] = $targetId;
+
+        $this->__callApi("https://api.line.me/v2/bot/message/push", $bot, $body);
+    }
+
+    public function sendReply(string $bot, string $message, string $replyToken): void
+    {
+        if (!array_key_exists($bot, $this->tokens)) {
+            throw new \Exception("Unknown bot: {$bot}");
         }
-        if (!empty($replyToken)) {
-            $body["replyToken"] = $replyToken;
-        }
+
+        $body = [
+            "replyToken" => $replyToken,
+            "messages" => [
+                [
+                    "type" => "text",
+                    "text" => $message,
+                ],
+            ],
+        ];
+
+        $this->__callApi("https://api.line.me/v2/bot/message/reply", $bot, $body);
+    }
+
+    private function __callApi(string $url, string $bot, array $body): void
+    {
+        $headers = [
+            "Content-Type: application/json",
+            "Authorization: Bearer {$this->tokens[$bot]}",
+        ];
         $ch = curl_init();
         try {
             curl_setopt_array($ch, [
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_URL => "https://api.line.me/v2/bot/message/push",
+                CURLOPT_URL => $url,
                 CURLOPT_POST => true,
                 CURLOPT_HTTPHEADER => $headers,
                 CURLOPT_POSTFIELDS => json_encode($body),
@@ -70,8 +86,9 @@ final class Line
             $response = curl_exec($ch);
             $httpcode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
             if ($httpcode != "200") {
+                $bodyVar = var_export($body);
                 throw new \Exception(
-                    "Failed to send message [bot: {$bot}, to: {$target}, message: {$message}]. " .
+                    "Failed to send message [bot: {$bot}, body: {$bodyVar}]. " .
                         "Http response code: [{$httpcode}]"
                 );
             }
