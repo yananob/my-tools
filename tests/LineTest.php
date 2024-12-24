@@ -10,7 +10,7 @@ final class LineTest extends TestCase
     public function testSendMessage(): void
     {
         $line = new Line(__DIR__ . "/configs/line.json");
-        $line->sendMessage(
+        $line->sendPush(
             bot: "test",
             target: "test",
             message: "[LineTest] Sent by Messaging API!",

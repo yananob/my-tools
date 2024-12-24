@@ -20,7 +20,7 @@ final class Line
      * @param $target ターゲット line.jsonで指定した宛先を指定
      * @param $targetId ターゲットID eventから取得したIDなど、toを直接指定したい場合に指定
      */
-    public function sendMessage(
+    public function sendPush(
         string $bot,
         ?string $target = null,
         ?string $targetId = null,
