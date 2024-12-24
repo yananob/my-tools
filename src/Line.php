@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace yananob\MyTools;
 
+use Exception;
+
 final class Line
 {
     private array $tokens;
@@ -73,7 +75,10 @@ final class Line
                 "chatId" => empty($target) ? $targetId : $this->presetTargetIds[$target],
                 "loadingSeconds" => 5,
             ];
-            $this->__callApi("https://api.line.me/v2/bot/chat/loading/start", $bot, $body, ["202"]);
+            try {
+                $this->__callApi("https://api.line.me/v2/bot/chat/loading/start", $bot, $body, ["202"]);
+            } catch (Exception $e) {
+            }
         }
 
         // reply
