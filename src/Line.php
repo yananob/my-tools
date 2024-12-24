@@ -73,7 +73,7 @@ final class Line
                 "chatId" => empty($target) ? $targetId : $this->presetTargetIds[$target],
                 "loadingSeconds" => 5,
             ];
-            $this->__callApi("https://api.line.me/v2/bot/chat/loading/start", $bot, $body);
+            $this->__callApi("https://api.line.me/v2/bot/chat/loading/start", $bot, $body, ["202"]);
         }
 
         // reply
@@ -89,7 +89,7 @@ final class Line
         $this->__callApi("https://api.line.me/v2/bot/message/reply", $bot, $body);
     }
 
-    private function __callApi(string $url, string $bot, array $body): void
+    private function __callApi(string $url, string $bot, array $body, array $allowHttpCodes = ["200"]): void
     {
         $headers = [
             "Content-Type: application/json",
@@ -106,7 +106,7 @@ final class Line
             ]);
             $response = curl_exec($ch);
             $httpcode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-            if ($httpcode != "200") {
+            if (!in_array($httpcode, $allowHttpCodes)) {
                 $bodyVar = var_export($body);
                 throw new \Exception(
                     "Failed to send message [bot: {$bot}, body: {$bodyVar}]. " .
