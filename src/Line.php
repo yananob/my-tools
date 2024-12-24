@@ -45,16 +45,38 @@ final class Line
                 ],
             ],
         ];
-
         $this->__callApi("https://api.line.me/v2/bot/message/push", $bot, $body);
     }
 
-    public function sendReply(string $bot, string $message, string $replyToken): void
-    {
+    public function sendReply(
+        string $bot,
+        string $replyToken,
+        string $message,
+        bool $showLoading = true,
+        ?string $target = null,
+        ?string $targetId = null,
+    ): void {
         if (!array_key_exists($bot, $this->tokens)) {
             throw new \Exception("Unknown bot: {$bot}");
         }
 
+        // show loading animation
+        if ($showLoading) {
+            if (!empty($target) && !array_key_exists($target, $this->presetTargetIds)) {
+                throw new \Exception("Unknown target: {$target}");
+            }
+            if (empty($target) && empty($targetId)) {
+                throw new \Exception('Please specify $target or $targetId');
+            }
+
+            $body = [
+                "chatId" => empty($target) ? $targetId : $this->presetTargetIds[$target],
+                "loadingSeconds" => 5,
+            ];
+            $this->__callApi("https://api.line.me/v2/bot/chat/loading/start", $bot, $body);
+        }
+
+        // reply
         $body = [
             "replyToken" => $replyToken,
             "messages" => [
@@ -64,7 +86,6 @@ final class Line
                 ],
             ],
         ];
-
         $this->__callApi("https://api.line.me/v2/bot/message/reply", $bot, $body);
     }
 
