@@ -75,6 +75,7 @@ final class Line
                 "chatId" => empty($target) ? $targetId : $this->presetTargetIds[$target],
                 "loadingSeconds" => 5,
             ];
+            // MEMO: ユーザー以外（グループなど）に実行すると400エラーになるので、握りつぶす
             try {
                 $this->__callApi("https://api.line.me/v2/bot/chat/loading/start", $bot, $body, ["202"]);
             } catch (Exception $e) {
