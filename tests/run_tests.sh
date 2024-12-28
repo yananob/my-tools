@@ -1,6 +1,13 @@
 #!/bin/bash
 set -eu
 
+echo "Running PHPStan..."
 ./vendor/bin/phpstan analyze -c phpstan.neon
 
-./vendor/bin/phpunit --colors=auto --display-notices --display-warnings tests/
+TEST_TARGET=""
+if [ $# -eq 1 ];then
+    TEST_TARGET=$1.php
+fi
+
+echo "Running PHPUnit $TEST_TARGET..."
+./vendor/bin/phpunit --colors=auto --display-notices --display-warnings tests/$TEST_TARGET

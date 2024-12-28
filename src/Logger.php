@@ -13,7 +13,7 @@ final class Logger
         $this->fp = fopen(getenv('LOGGER_OUTPUT') ?: 'php://stderr', 'wb');
     }
 
-    public function log(string|array|object|null $message): void
+    public function log($message): void
     {
         if (is_null($message)) {
             $message = "";
