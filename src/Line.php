@@ -54,35 +54,11 @@ final class Line
         string $bot,
         string $replyToken,
         string $message,
-        bool $showLoading = true,
-        ?string $target = null,
-        ?string $targetId = null,
     ): void {
         if (!array_key_exists($bot, $this->tokens)) {
             throw new \Exception("Unknown bot: {$bot}");
         }
 
-        // show loading animation
-        if ($showLoading) {
-            if (!empty($target) && !array_key_exists($target, $this->presetTargetIds)) {
-                throw new \Exception("Unknown target: {$target}");
-            }
-            if (empty($target) && empty($targetId)) {
-                throw new \Exception('Please specify $target or $targetId');
-            }
-
-            $body = [
-                "chatId" => empty($target) ? $targetId : $this->presetTargetIds[$target],
-                "loadingSeconds" => 5,
-            ];
-            // MEMO: ユーザー以外（グループなど）に実行すると400エラーになるので、握りつぶす
-            try {
-                $this->__callApi("https://api.line.me/v2/bot/chat/loading/start", $bot, $body, ["202"]);
-            } catch (Exception $e) {
-            }
-        }
-
-        // reply
         $body = [
             "replyToken" => $replyToken,
             "messages" => [
@@ -93,6 +69,29 @@ final class Line
             ],
         ];
         $this->__callApi("https://api.line.me/v2/bot/message/reply", $bot, $body);
+    }
+
+    public function showLoading(
+        string $bot,
+        ?string $target = null,
+        ?string $targetId = null,
+    ): void {
+        if (!empty($target) && !array_key_exists($target, $this->presetTargetIds)) {
+            throw new \Exception("Unknown target: {$target}");
+        }
+        if (empty($target) && empty($targetId)) {
+            throw new \Exception('Please specify $target or $targetId');
+        }
+
+        $body = [
+            "chatId" => empty($target) ? $targetId : $this->presetTargetIds[$target],
+            "loadingSeconds" => 5,
+        ];
+        // MEMO: ユーザー以外（グループなど）に実行すると400エラーになるので、握りつぶす
+        try {
+            $this->__callApi("https://api.line.me/v2/bot/chat/loading/start", $bot, $body, ["202"]);
+        } catch (Exception $e) {
+        }
     }
 
     private function __callApi(string $url, string $bot, array $body, array $allowHttpCodes = ["200"]): void
