@@ -16,6 +16,8 @@ final class LoggerTest extends TestCase
 
     public function testLog(): void
     {
+        $this->logger->logSplitter();
+
         $this->logger->log("hogehoge");
         $this->logger->log(1);
         $this->logger->log(1.2345);

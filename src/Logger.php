@@ -27,4 +27,9 @@ final class Logger
 
         fwrite($this->fp, $log_message . PHP_EOL);
     }
+
+    public function logSplitter(string $char = "-", int $count = 120): void
+    {
+        $this->log(str_repeat($char, $count));
+    }
 }
