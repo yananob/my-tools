@@ -85,7 +85,7 @@ final class Line
 
         $body = [
             "chatId" => empty($target) ? $targetId : $this->presetTargetIds[$target],
-            "loadingSeconds" => 5,
+            "loadingSeconds" => 60,
         ];
         // MEMO: ユーザー以外（グループなど）に実行すると400エラーになるので、握りつぶす
         try {
