@@ -118,7 +118,7 @@ final class Line
             $response = curl_exec($ch);
             $httpcode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
             if (!in_array($httpcode, $allowHttpCodes)) {
-                $bodyVar = var_export($body);
+                $bodyVar = var_export($body, true);
                 throw new \Exception(
                     "Failed to send message [bot: {$bot}, body: {$bodyVar}]. " .
                         "Http response code: [{$httpcode}]"
