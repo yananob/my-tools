@@ -54,6 +54,7 @@ final class Line
         string $bot,
         string $replyToken,
         string $message,
+        array $quickReply = null,
     ): void {
         if (!array_key_exists($bot, $this->tokens)) {
             throw new \Exception("Unknown bot: {$bot}");
@@ -68,6 +69,11 @@ final class Line
                 ],
             ],
         ];
+
+        if (!empty($quickReply)) {
+            $body["messages"]["quickReply"]["items"] = $quickReply;
+        }
+
         $this->__callApi("https://api.line.me/v2/bot/message/reply", $bot, $body);
     }
 
