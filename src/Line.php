@@ -71,7 +71,7 @@ final class Line
         ];
 
         if (!empty($quickReply)) {
-            $body["messages"]["quickReply"]["items"] = $quickReply;
+            $body["messages"][0]["quickReply"]["items"] = $quickReply;
         }
 
         $this->__callApi("https://api.line.me/v2/bot/message/reply", $bot, $body);
