@@ -23,14 +23,14 @@ final class Utils
         return $result;
     }
 
-    public static function invokePrivateMethod(Object $object, string $methodName, ...$params)
-    {
-        $reflection = new \ReflectionClass($object);
-        $method = $reflection->getMethod($methodName);
-        $method->setAccessible(true);
-        $result = $method->invoke($object, ...$params);
-        return $result;
-    }
+    // public static function invokePrivateMethod(Object $object, string $methodName, ...$params)
+    // {
+    //     $reflection = new \ReflectionClass($object);
+    //     $method = $reflection->getMethod($methodName);
+    //     $method->setAccessible(true);
+    //     $result = $method->invoke($object, ...$params);
+    //     return $result;
+    // }
 
     public static function sortObjectArrayByProperty(array $ary, string $property): array
     {
