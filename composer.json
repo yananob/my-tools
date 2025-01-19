@@ -4,7 +4,8 @@
     "type": "library",
     "require": {
         "php": ">= 8.2",
-        "google/apiclient": "^2.0"
+        "google/apiclient": "^2.0",
+        "nesbot/carbon": "^3.8"
     },
     "autoload": {
         "psr-4": {

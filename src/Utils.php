@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace yananob\MyTools;
 
+use Carbon\Carbon;
+
 final class Utils
 {
     public function __construct()
@@ -42,5 +44,10 @@ final class Utils
             }
         );
         return $ary;
+    }
+
+    public static function getCarbonWithoutDate(string $timezone): Carbon
+    {
+        return (new Carbon(timezone: $timezone))->setTime(0, 0, 0);
     }
 }

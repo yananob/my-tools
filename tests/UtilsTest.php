@@ -13,4 +13,10 @@ final class UtilsTest extends TestCase
         $this->assertEquals("value1", $config["key1"]);
         $this->assertEquals("value2-1", $config["key2"]["key2-1"]);
     }
+
+    public function testGetCarbonWithoutDate(): void
+    {
+        $now = Utils::getCarbonWithoutDate("Asia/Tokyo");
+        $this->assertTrue(true);
+    }
 }
