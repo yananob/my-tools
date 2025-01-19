@@ -50,4 +50,9 @@ final class Utils
     {
         return (new Carbon(timezone: $timezone))->setTime(0, 0, 0);
     }
+
+    public static function trimFullSpace(string $input): string
+    {
+        return preg_replace("/^\s+|\s+$/u", "", $input);
+    }
 }

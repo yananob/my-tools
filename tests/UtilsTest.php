@@ -19,4 +19,11 @@ final class UtilsTest extends TestCase
         $now = Utils::getCarbonWithoutDate("Asia/Tokyo");
         $this->assertTrue(true);
     }
+
+    public function testTrimFullSpace(): void
+    {
+        $this->assertSame("ほげほげ", Utils::trimFullSpace("　ほげほげ"));
+        $this->assertSame("ほげほげ", Utils::trimFullSpace("ほげほげ　"));
+        $this->assertSame("ほげ　ほげ", Utils::trimFullSpace("ほげ　ほげ"));
+    }
 }
