@@ -6,6 +6,7 @@ namespace yananob\MyTools;
 
 final class Test
 {
+    // @deprecated
     public static function invokePrivateMethod($object, string $methodName, ...$args): mixed
     {
         $reflection = new \ReflectionClass($object);
