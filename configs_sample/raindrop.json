@@ -1,0 +1,4 @@
+{
+    "access_token": "YOUR_RAINDROP_ACCESS_TOKEN",
+    "api_endpoint": "https://api.raindrop.io/rest/v1/raindrop"
+}
