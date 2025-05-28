@@ -10,7 +10,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use \Google\Service\Gmail;
 
-final class GmailWrapper
+class GmailWrapper
 {
     /**
      * Returns an authorized API client.

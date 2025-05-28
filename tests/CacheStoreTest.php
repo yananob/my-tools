@@ -6,7 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use yananob\MyTools\CacheStore;
 
-final class CacheStoreTest extends PHPUnit\Framework\TestCase
+class CacheStoreTest extends PHPUnit\Framework\TestCase
 {
     // public static function isLaunchDataProvider(): array
     // {

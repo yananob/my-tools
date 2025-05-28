@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use yananob\MyTools\Line;
 
-final class LineTest extends TestCase
+class LineTest extends TestCase
 {
     public function testSendMessage(): void
     {

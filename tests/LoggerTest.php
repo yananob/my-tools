@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use yananob\MyTools\Logger;
 
-final class LoggerTest extends TestCase
+class LoggerTest extends TestCase
 {
     private Logger $logger;
 

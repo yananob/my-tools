@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use yananob\MyTools\Utils;
 
-final class UtilsTest extends TestCase
+class UtilsTest extends TestCase
 {
     public function testGetConfig(): void
     {

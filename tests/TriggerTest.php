@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use yananob\MyTools\Trigger;
 
-final class TriggerTest extends TestCase
+class TriggerTest extends TestCase
 {
     public static function isLaunchDataProvider(): array
     {

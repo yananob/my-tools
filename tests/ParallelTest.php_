@@ -6,7 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use yananob\MyTools\Parallel;
 
-final class ParallelTest extends PHPUnit\Framework\TestCase
+class ParallelTest extends PHPUnit\Framework\TestCase
 {
     public function testDoWorks(): void
     {

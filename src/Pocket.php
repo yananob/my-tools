@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace yananob\MyTools;
 
-final class Pocket
+class Pocket
 {
     private string $consumer_key;
     private string $access_token;

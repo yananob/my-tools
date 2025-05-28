@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace yananob\MyTools;
 
-final class Parallel
+class Parallel
 {
     private static function _runSubprocess(callable $func, $parameter): void
     {

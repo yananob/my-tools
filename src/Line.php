@@ -6,7 +6,7 @@ namespace yananob\MyTools;
 
 use Exception;
 
-final class Line
+class Line
 {
     private array $tokens;
     private array $presetTargetIds;

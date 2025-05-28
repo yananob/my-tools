@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace yananob\MyTools;
 
-final class MessagesQueue
+class MessagesQueue
 {
     private const TYPE_MESSAGES = "messages";
     private const TYPE_ALERTS = "alerts";

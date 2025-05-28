@@ -6,7 +6,7 @@ namespace yananob\MyTools;
 
 use Carbon\Carbon;
 
-final class Utils
+class Utils
 {
     public function __construct()
     {

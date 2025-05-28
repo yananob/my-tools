@@ -14,7 +14,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
 
-final class RaindropTest extends TestCase
+class RaindropTest extends TestCase
 {
     private string $sampleConfigPath = __DIR__ . '/configs/raindrop.test.json';
     private array $sampleConfig = [

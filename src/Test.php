@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace yananob\MyTools;
 
-final class Test
+class Test
 {
     // @deprecated
     public static function invokePrivateMethod($object, string $methodName, ...$args): mixed

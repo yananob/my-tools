@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace yananob\MyTools;
 
-final class Logger
+class Logger
 {
     private $fp;
 

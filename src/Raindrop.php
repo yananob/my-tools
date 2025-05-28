@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 
-final class Raindrop
+class Raindrop
 {
     private string $accessToken;
     private string $apiEndpoint = 'https://api.raindrop.io/rest/v1/raindrop'; // Default API endpoint

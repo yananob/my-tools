@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace yananob\MyTools;
 
-final class Trigger
+class Trigger
 {
     private ?\DateTime $debugDate;
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use yananob\MyTools\Gpt;
 
-final class GptTest extends TestCase
+class GptTest extends TestCase
 {
     public function testGetAnswer(): void
     {
