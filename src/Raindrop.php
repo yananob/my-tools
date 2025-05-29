@@ -36,7 +36,7 @@ class Raindrop
         ];
         $body = array_merge([
             'link' => $url,
-            'pleaseParse' => [],
+            'pleaseParse' => new \stdClass(),
         ], $options);
 
         try {
