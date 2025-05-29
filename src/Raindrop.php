@@ -34,10 +34,13 @@ class Raindrop
             'Authorization' => 'Bearer ' . $this->accessToken,
             'Content-Type' => 'application/json',
         ];
-        $body = array_merge(['link' => $url], $options);
+        $body = array_merge([
+            'link' => $url,
+            'pleaseParse' => [],
+        ], $options);
 
         try {
-            $response = $this->client->post($this->apiEndpoint, [
+            $response = $this->client->request("post", $this->apiEndpoint, [
                 'headers' => $headers,
                 'json' => $body,
             ]);
