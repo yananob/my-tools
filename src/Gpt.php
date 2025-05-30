@@ -12,14 +12,11 @@ use \GuzzleHttp\Client;
 class Gpt
 {
     private string $secret;
-    private string $model;
     private Client $client;
 
-    public function __construct(string $configPath)
+    public function __construct(private string $model)
     {
-        $config = Utils::getConfig($configPath);
-        $this->secret = $config["secret"];
-        $this->model = $config["model"];
+        $this->secret = getenv('OPENAI_API_KEY');
         $this->client = new Client();
     }
 
