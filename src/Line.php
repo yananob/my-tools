@@ -8,14 +8,9 @@ use Exception;
 
 class Line
 {
-    private array $tokens;
-    private array $presetTargetIds;
 
-    public function __construct(string $configPath)
+    public function __construct(private array $tokens, private array $presetTargetIds)
     {
-        $config = Utils::getConfig($configPath);
-        $this->tokens = $config["tokens"];
-        $this->presetTargetIds = $config["target_ids"];
     }
 
     /** 

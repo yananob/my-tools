@@ -16,7 +16,7 @@ class GmailWrapper
      * Returns an authorized API client.
      * @return \Google\Client the authorized client object
      */
-    public static function getClient(string $clientsecret_path, string $apitoken_path)
+    public static function getClient(array $authConfig, array $apitoken_data)
     {
         $logger = new Logger("GoogleAPI");
 
@@ -28,7 +28,7 @@ class GmailWrapper
         $client = new \Google\Client();
         $client->setApplicationName('MyCFApp');
         $client->setScopes($SCOPES);
-        $client->setAuthConfig($clientsecret_path);
+        $client->setAuthConfig($authConfig);
         $client->setAccessType('offline');
         $client->setPrompt('select_account consent');
         // $client->setRedirectUri('https://www.google.com/');
@@ -38,11 +38,7 @@ class GmailWrapper
         // created automatically when the authorization flow completes for the first
         // time.
         // https://sqripts.com/2022/08/25/20386/
-        if (file_exists($apitoken_path)) {
-            $logger->log("token file exists");
-            $accessToken = json_decode(file_get_contents($apitoken_path), true);
-            $client->setAccessToken($accessToken);
-        }
+        $client->setAccessToken($apitoken_data);
 
         // If there is no previous token or it's expired.
         if ($client->isAccessTokenExpired()) {
@@ -55,11 +51,6 @@ class GmailWrapper
                 // ★THIS DOESNT WORK. use hello_gmail/create_refresh_token instead
                 throw new \Exception("THIS DOESN'T WORK");
             }
-            // Save the token to a file.
-            if (!file_exists(dirname($apitoken_path))) {
-                mkdir(dirname($apitoken_path), 0700, true);
-            }
-            file_put_contents($apitoken_path, json_encode($client->getAccessToken()));
         }
         return $client;
     }

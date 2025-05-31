@@ -9,7 +9,9 @@ class LineTest extends TestCase
 {
     public function testSendMessage(): void
     {
-        $line = new Line(__DIR__ . "/configs/line.json");
+        $tokens = ["test" => "testTOKEN"];
+        $targetIds = ["test" => "testID"];
+        $line = new Line($tokens, $targetIds);
         $line->sendPush(
             bot: "test",
             target: "test",
@@ -20,7 +22,9 @@ class LineTest extends TestCase
 
     public function testGetTargets(): void
     {
-        $line = new Line(__DIR__ . "/configs/line_dummy.json");
+        $tokens = ["hoge1" => "hoge1TOKEN", "hoge2" => "hoge2TOKEN", "__EOF__" => ""];
+        $targetIds = ["hoge1" => "hoge1ID", "hoge2" => "hoge2ID", "__MEMO__" => "ここにグループIDやユーザーIDを指定", "__EOF__" => ""];
+        $line = new Line($tokens, $targetIds);
         $this->assertEquals(
             ["hoge1", "hoge2"],
             $line->getTargets()
