@@ -11,15 +11,11 @@ use \GuzzleHttp\Client;
  */
 class Gpt
 {
-    private string $secret;
     private Client $client;
 
-    public function __construct(string $openai_api_key, private string $model)
+    public function __construct(private string $openaiApiKey, private string $model)
     {
-        $this->secret = $openai_api_key;
         // debug!!
-        $logger = new Logger();
-        $logger->log("api: " . $this->secret);
         $this->client = new Client();
     }
 
@@ -47,7 +43,7 @@ class Gpt
             [
                 'headers' => [
                     'Content-Type' => 'application/json',
-                    'Authorization' => "Bearer {$this->secret}",
+                    'Authorization' => "Bearer {$this->openaiApiKey}",
                 ],
                 'body' => json_encode($payload),
             ]

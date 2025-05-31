@@ -10,13 +10,11 @@ use GuzzleHttp\Exception\RequestException;
 
 class Raindrop
 {
-    private string $accessToken;
     private string $apiEndpoint = 'https://api.raindrop.io/rest/v1/raindrop'; // Default API endpoint
     private ClientInterface $client;
 
-    public function __construct(string $accessToken, ?string $apiEndpoint = null, ClientInterface $client = null)
+    public function __construct(private string $accessToken, ?string $apiEndpoint = null, ClientInterface $client = null)
     {
-        $this->accessToken = $accessToken;
         if ($apiEndpoint !== null) {
             $this->apiEndpoint = $apiEndpoint;
         }

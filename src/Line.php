@@ -8,13 +8,9 @@ use Exception;
 
 class Line
 {
-    private array $tokens;
-    private array $presetTargetIds;
 
-    public function __construct(array $tokens, array $presetTargetIds)
+    public function __construct(private array $tokens, private array $presetTargetIds)
     {
-        $this->tokens = $tokens;
-        $this->presetTargetIds = $presetTargetIds;
     }
 
     /** 

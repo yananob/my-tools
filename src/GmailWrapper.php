@@ -16,7 +16,7 @@ class GmailWrapper
      * Returns an authorized API client.
      * @return \Google\Client the authorized client object
      */
-    public static function getClient(array $clientsecret_data, array $apitoken_data)
+    public static function getClient(array $authConfig, array $apitoken_data)
     {
         $logger = new Logger("GoogleAPI");
 
@@ -28,7 +28,7 @@ class GmailWrapper
         $client = new \Google\Client();
         $client->setApplicationName('MyCFApp');
         $client->setScopes($SCOPES);
-        $client->setAuthConfig($clientsecret_data);
+        $client->setAuthConfig($authConfig);
         $client->setAccessType('offline');
         $client->setPrompt('select_account consent');
         // $client->setRedirectUri('https://www.google.com/');

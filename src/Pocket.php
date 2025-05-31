@@ -6,13 +6,8 @@ namespace yananob\MyTools;
 
 class Pocket
 {
-    private string $consumer_key;
-    private string $access_token;
-
-    public function __construct(string $consumer_key, string $access_token)
+    public function __construct(private string $consumer_key, private string $access_token)
     {
-        $this->consumer_key = $consumer_key;
-        $this->access_token = $access_token;
     }
 
     public function add(string $url)
