@@ -14,9 +14,9 @@ class Gpt
     private string $secret;
     private Client $client;
 
-    public function __construct(private string $model)
+    public function __construct(private string $model, string $openai_api_key)
     {
-        $this->secret = getenv('OPENAI_API_KEY');
+        $this->secret = $openai_api_key;
         // debug!!
         $logger = new Logger();
         $logger->log("api: " . $this->secret);

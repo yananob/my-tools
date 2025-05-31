@@ -11,11 +11,10 @@ class Line
     private array $tokens;
     private array $presetTargetIds;
 
-    public function __construct(string $configPath)
+    public function __construct(array $tokens, array $presetTargetIds)
     {
-        $config = Utils::getConfig($configPath);
-        $this->tokens = $config["tokens"];
-        $this->presetTargetIds = $config["target_ids"];
+        $this->tokens = $tokens;
+        $this->presetTargetIds = $presetTargetIds;
     }
 
     /** 

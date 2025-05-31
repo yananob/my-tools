@@ -9,11 +9,10 @@ class Pocket
     private string $consumer_key;
     private string $access_token;
 
-    public function __construct(string $configPath)
+    public function __construct(string $consumer_key, string $access_token)
     {
-        $config = Utils::getConfig($configPath);
-        $this->consumer_key = $config["consumer_key"];
-        $this->access_token = $config["access_token"];
+        $this->consumer_key = $consumer_key;
+        $this->access_token = $access_token;
     }
 
     public function add(string $url)

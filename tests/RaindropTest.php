@@ -16,45 +16,15 @@ use GuzzleHttp\Exception\RequestException;
 
 class RaindropTest extends TestCase
 {
-    private string $sampleConfigPath = __DIR__ . '/configs/raindrop.test.json';
     private array $sampleConfig = [
         'access_token' => 'test_token',
         'api_endpoint' => 'https://api.example.com/v1/raindrop'
     ];
 
-    protected function setUp(): void
-    {
-        // Create a dummy config file for testing
-        if (!is_dir(__DIR__ . '/configs')) {
-            mkdir(__DIR__ . '/configs');
-        }
-        file_put_contents($this->sampleConfigPath, json_encode($this->sampleConfig));
-    }
-
-    protected function tearDown(): void
-    {
-        // Clean up the dummy config file
-        if (file_exists($this->sampleConfigPath)) {
-            unlink($this->sampleConfigPath);
-        }
-        if (is_dir(__DIR__ . '/configs') && count(scandir(__DIR__ . '/configs')) == 2) { // . and ..
-            rmdir(__DIR__ . '/configs');
-        }
-    }
-
     public function testConstructorLoadsConfig(): void
     {
-        $raindrop = new Raindrop($this->sampleConfigPath);
+        $raindrop = new Raindrop($this->sampleConfig['access_token'], $this->sampleConfig['api_endpoint']);
         $this->assertInstanceOf(Raindrop::class, $raindrop);
-    }
-
-    public function testConstructorThrowsExceptionIfAccessTokenMissing(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Access token not found in Raindrop config.');
-        $badConfig = ['api_endpoint' => 'https://api.example.com/v1/raindrop'];
-        file_put_contents($this->sampleConfigPath, json_encode($badConfig));
-        new Raindrop($this->sampleConfigPath);
     }
 
     public function testAddSuccessfully(): void
@@ -65,7 +35,7 @@ class RaindropTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack, 'base_uri' => $this->sampleConfig['api_endpoint']]); // Added base_uri to ensure mock is hit
 
-        $raindrop = new Raindrop($this->sampleConfigPath, $client);
+        $raindrop = new Raindrop($this->sampleConfig['access_token'], $this->sampleConfig['api_endpoint'], $client);
         $response = $raindrop->add('http://example.com');
 
         $this->assertTrue($response['result']);
@@ -86,7 +56,7 @@ class RaindropTest extends TestCase
         // Ensure Guzzle does not throw its own exception for 500, so our custom logic is hit
         $client = new Client(['handler' => $handlerStack, 'base_uri' => $this->sampleConfig['api_endpoint'], 'http_errors' => false]);
 
-        $raindrop = new Raindrop($this->sampleConfigPath, $client);
+        $raindrop = new Raindrop($this->sampleConfig['access_token'], $this->sampleConfig['api_endpoint'], $client);
         $raindrop->add('http://example.com/fail');
     }
     
@@ -101,7 +71,7 @@ class RaindropTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack, 'base_uri' => $this->sampleConfig['api_endpoint']]);
 
-        $raindrop = new Raindrop($this->sampleConfigPath, $client);
+        $raindrop = new Raindrop($this->sampleConfig['access_token'], $this->sampleConfig['api_endpoint'], $client);
         $raindrop->add('http://example.com/guzzle-fail');
     }
 }
