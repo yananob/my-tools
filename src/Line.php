@@ -6,14 +6,18 @@ namespace yananob\MyTools;
 
 use Exception;
 
+use GuzzleHttp\Client;
+
 class Line
 {
+    private Client $client;
 
-    public function __construct(private array $tokens, private array $presetTargetIds)
+    public function __construct(private array $tokens, private array $presetTargetIds, ?Client $client = null)
     {
+        $this->client = $client ?? new Client();
     }
 
-    /** 
+    /**
      * @param $target ターゲット line.jsonで指定した宛先を指定
      * @param $targetId ターゲットID eventから取得したIDなど、toを直接指定したい場合に指定
      */
@@ -98,29 +102,22 @@ class Line
     private function __callApi(string $url, string $bot, array $body, array $allowHttpCodes = ["200"]): void
     {
         $headers = [
-            "Content-Type: application/json",
-            "Authorization: Bearer {$this->tokens[$bot]}",
+            'Content-Type' => 'application/json',
+            'Authorization' => "Bearer {$this->tokens[$bot]}",
         ];
-        $ch = curl_init();
-        try {
-            curl_setopt_array($ch, [
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_URL => $url,
-                CURLOPT_POST => true,
-                CURLOPT_HTTPHEADER => $headers,
-                CURLOPT_POSTFIELDS => json_encode($body),
-            ]);
-            $response = curl_exec($ch);
-            $httpcode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-            if (!in_array($httpcode, $allowHttpCodes)) {
-                $bodyVar = var_export($body, true);
-                throw new \Exception(
-                    "Failed to send message [bot: {$bot}, body: {$bodyVar}]. " .
-                        "Http response code: [{$httpcode}]"
-                );
-            }
-        } finally {
-            curl_close($ch);
+
+        $response = $this->client->post($url, [
+            'headers' => $headers,
+            'json' => $body,
+        ]);
+
+        $httpcode = $response->getStatusCode();
+        if (!in_array($httpcode, $allowHttpCodes)) {
+            $bodyVar = var_export($body, true);
+            throw new \Exception(
+                "Failed to send message [bot: {$bot}, body: {$bodyVar}]. " .
+                "Http response code: [{$httpcode}]"
+            );
         }
     }
 
