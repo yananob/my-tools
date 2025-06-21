@@ -13,10 +13,9 @@ class Gpt
 {
     private Client $client;
 
-    public function __construct(private string $openaiApiKey, private string $model)
+    public function __construct(private string $openaiApiKey, private string $model, ?Client $client = null)
     {
-        // debug!!
-        $this->client = new Client();
+        $this->client = $client ?? new Client();
     }
 
     public function getAnswer(string $context, string $message): string
