@@ -8,14 +8,21 @@ use Exception;
 
 class Line
 {
-
+    /**
+     * @param array $tokens LINE APIのアクセストークン
+     * @param array $presetTargetIds プリセットされた送信先ID
+     */
     public function __construct(private array $tokens, private array $presetTargetIds)
     {
     }
 
     /** 
-     * @param $target ターゲット line.jsonで指定した宛先を指定
-     * @param $targetId ターゲットID eventから取得したIDなど、toを直接指定したい場合に指定
+     * プッシュメッセージを送信します。
+     * @param string $bot ボット名
+     * @param string|null $target ターゲット line.jsonで指定した宛先を指定
+     * @param string|null $targetId ターゲットID eventから取得したIDなど、toを直接指定したい場合に指定
+     * @param string $message 送信するメッセージ
+     * @throws \Exception 不明なボット名、不明なターゲット、またはターゲットが指定されていない場合にスローされます。
      */
     public function sendPush(
         string $bot,
@@ -45,6 +52,14 @@ class Line
         $this->__callApi("https://api.line.me/v2/bot/message/push", $bot, $body);
     }
 
+    /**
+     * リプライメッセージを送信します。
+     * @param string $bot ボット名
+     * @param string $replyToken リプライトークン
+     * @param string $message 送信するメッセージ
+     * @param array|null $quickReply クイックリプライのアイテム配列
+     * @throws \Exception 不明なボット名の場合にスローされます。
+     */
     public function sendReply(
         string $bot,
         string $replyToken,
@@ -72,6 +87,13 @@ class Line
         $this->__callApi("https://api.line.me/v2/bot/message/reply", $bot, $body);
     }
 
+    /**
+     * ローディングアニメーションを表示します。
+     * @param string $bot ボット名
+     * @param string|null $target ターゲット line.jsonで指定した宛先を指定
+     * @param string|null $targetId ターゲットID eventから取得したIDなど、toを直接指定したい場合に指定
+     * @throws \Exception 不明なターゲット、またはターゲットが指定されていない場合にスローされます。
+     */
     public function showLoading(
         string $bot,
         ?string $target = null,
@@ -95,6 +117,14 @@ class Line
         }
     }
 
+    /**
+     * LINE APIを呼び出します。
+     * @param string $url APIのURL
+     * @param string $bot ボット名
+     * @param array $body リクエストボディ
+     * @param array $allowHttpCodes 許可するHTTPステータスコードの配列
+     * @throws \Exception API呼び出しに失敗した場合にスローされます。
+     */
     private function __callApi(string $url, string $bot, array $body, array $allowHttpCodes = ["200"]): void
     {
         $headers = [
@@ -124,6 +154,11 @@ class Line
         }
     }
 
+    /**
+     * プリセットされた送信先IDのリストを取得します。
+     * '__'で始まるターゲットは除外されます。
+     * @return array ターゲットの配列
+     */
     public function getTargets(): array
     {
         $result = [];
