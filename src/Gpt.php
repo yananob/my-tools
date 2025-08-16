@@ -19,7 +19,7 @@ class Gpt
         $this->client = new Client();
     }
 
-    public function getAnswer(string $context, string $message): string
+    public function getAnswer(string $context, string $message, array $options = []): string
     {
         $logger = new Logger();
         $logger->log("Calling ChatApi: [{$context}] <{$message}>");
@@ -37,6 +37,7 @@ class Gpt
                 ],
             ],
         ];
+        $payload = array_merge($payload, $options);
 
         $response = $this->client->post(
             "https://api.openai.com/v1/chat/completions",
