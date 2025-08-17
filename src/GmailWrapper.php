@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace yananob\MyTools;
 
 // use Google\Client;
-// use MyApp\common\Logger;
-require_once __DIR__ . '/../vendor/autoload.php';
-
-use \Google\Service\Gmail;
+use Google\Service\Gmail;
 
 class GmailWrapper
 {
